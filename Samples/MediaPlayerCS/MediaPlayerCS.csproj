@@ -21,7 +21,7 @@
     <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxPackageDir>$(SolutionDir)Output\AppPackages\MediaPlayerCS\</AppxPackageDir>
@@ -29,6 +29,7 @@
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <BaseOutputPath>$(SolutionDir)Output\MediaPlayerCS\</BaseOutputPath>
     <BaseIntermediateOutputPath>$(SolutionDir)Intermediate\MediaPlayerCS\</BaseIntermediateOutputPath>
+    <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -126,6 +127,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LanguageTagConverter.h</LastGenOutput>
     </Content>
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
