@@ -409,73 +409,73 @@ namespace winrt::FFmpegInteropX::implementation
             interopMSS->Close();
     }
 
-    // Static function to read file stream and pass data to FFmpeg. Credit to Philipp Sch http://www.codeproject.com/Tips/489450/Creating-Custom-FFmpeg-IO-Context
-    static int FileStreamRead(void* ptr, uint8_t* buf, int bufSize)
-    {
-        IStream* pStream = reinterpret_cast<IStream*>(ptr);
-        ULONG bytesRead = 0;
-        HRESULT hr = pStream->Read(buf, bufSize, &bytesRead);
+    //// Static function to read file stream and pass data to FFmpeg. Credit to Philipp Sch http://www.codeproject.com/Tips/489450/Creating-Custom-FFmpeg-IO-Context
+    //static int FileStreamRead(void* ptr, uint8_t* buf, int bufSize)
+    //{
+    //    IStream* pStream = reinterpret_cast<IStream*>(ptr);
+    //    ULONG bytesRead = 0;
+    //    HRESULT hr = pStream->Read(buf, bufSize, &bytesRead);
 
-        if (FAILED(hr))
-        {
-            return -1;
-        }
+    //    if (FAILED(hr))
+    //    {
+    //        return -1;
+    //    }
 
-        // If we succeed but don't have any bytes, assume end of file
-        if (bytesRead == 0)
-        {
-            return AVERROR_EOF;  // Let FFmpeg know that we have reached eof
-        }
+    //    // If we succeed but don't have any bytes, assume end of file
+    //    if (bytesRead == 0)
+    //    {
+    //        return AVERROR_EOF;  // Let FFmpeg know that we have reached eof
+    //    }
 
-        return bytesRead;
-    }
+    //    return bytesRead;
+    //}
 
-    // Static function to seek in file stream. Credit to Philipp Sch http://www.codeproject.com/Tips/489450/Creating-Custom-FFmpeg-IO-Context
-    static int64_t FileStreamSeek(void* ptr, int64_t pos, int whence)
-    {
-        IStream* pStream = reinterpret_cast<IStream*>(ptr);
-        if (whence == AVSEEK_SIZE)
-        {
-            // get stream size
-            STATSTG status;
-            if (FAILED(pStream->Stat(&status, STATFLAG_NONAME)))
-            {
-                return -1;
-            }
-            return status.cbSize.QuadPart;
-        }
-        else
-        {
-            LARGE_INTEGER in;
-            in.QuadPart = pos;
-            ULARGE_INTEGER out = { 0 };
+    //// Static function to seek in file stream. Credit to Philipp Sch http://www.codeproject.com/Tips/489450/Creating-Custom-FFmpeg-IO-Context
+    //static int64_t FileStreamSeek(void* ptr, int64_t pos, int whence)
+    //{
+    //    IStream* pStream = reinterpret_cast<IStream*>(ptr);
+    //    if (whence == AVSEEK_SIZE)
+    //    {
+    //        // get stream size
+    //        STATSTG status;
+    //        if (FAILED(pStream->Stat(&status, STATFLAG_NONAME)))
+    //        {
+    //            return -1;
+    //        }
+    //        return status.cbSize.QuadPart;
+    //    }
+    //    else
+    //    {
+    //        LARGE_INTEGER in;
+    //        in.QuadPart = pos;
+    //        ULARGE_INTEGER out = { 0 };
 
-            if (FAILED(pStream->Seek(in, whence, &out)))
-            {
-                return -1;
-            }
+    //        if (FAILED(pStream->Seek(in, whence, &out)))
+    //        {
+    //            return -1;
+    //        }
 
-            return out.QuadPart; // Return the new position:
-        }
-    }
+    //        return out.QuadPart; // Return the new position:
+    //    }
+    //}
 
-    static int FileStreamWrite(void* ptr, uint8_t* buf, int bufSize)
-    {
-        IStream* pStream = reinterpret_cast<IStream*>(ptr);
-        ULONG bytesRead = 0;
-        HRESULT hr = pStream->Write(buf, bufSize, &bytesRead);
+    //static int FileStreamWrite(void* ptr, uint8_t* buf, int bufSize)
+    //{
+    //    IStream* pStream = reinterpret_cast<IStream*>(ptr);
+    //    ULONG bytesRead = 0;
+    //    HRESULT hr = pStream->Write(buf, bufSize, &bytesRead);
 
-        if (FAILED(hr))
-        {
-            return -1;
-        }
+    //    if (FAILED(hr))
+    //    {
+    //        return -1;
+    //    }
 
-        // If we succeed but don't have any bytes, assume end of file
-        if (bytesRead == 0)
-        {
-            return AVERROR_EOF;  // Let FFmpeg know that we have reached eof
-        }
+    //    // If we succeed but don't have any bytes, assume end of file
+    //    if (bytesRead == 0)
+    //    {
+    //        return AVERROR_EOF;  // Let FFmpeg know that we have reached eof
+    //    }
 
-        return bytesRead;
-    }
+    //    return bytesRead;
+    //}
 }
