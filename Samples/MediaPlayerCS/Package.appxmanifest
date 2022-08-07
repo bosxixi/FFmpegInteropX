@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" IgnorableNamespaces="uap mp uap3">
-  <Identity Name="34702SCORPIOX.PilotPlayer" Publisher="CN=DF9A504F-506E-4915-8241-961919C05E21" Version="1.0.3.0" />
+  <Identity Name="34702SCORPIOX.PilotPlayer" Publisher="CN=DF9A504F-506E-4915-8241-961919C05E21" Version="1.0.4.0" />
   <mp:PhoneIdentity PhoneProductId="4d368bd3-9bdc-416c-9bdf-7b6ff143a2ac" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Pilot Player</DisplayName>
