@@ -8,9 +8,9 @@
 
 namespace winrt::FFmpegInteropX::implementation
 {
-    static int FileStreamRead(void* ptr, uint8_t* buf, int bufSize);
-    static int FileStreamWrite(void* ptr, uint8_t* buf, int bufSize);
-    static int64_t FileStreamSeek(void* ptr, int64_t pos, int whence);
+    //static int FileStreamRead(void* ptr, uint8_t* buf, int bufSize);
+    //static int FileStreamWrite(void* ptr, uint8_t* buf, int bufSize);
+    //static int64_t FileStreamSeek(void* ptr, int64_t pos, int whence);
 
     IAsyncOperation<FFmpegInteropX::FrameGrabber> FrameGrabber::CreateFromStreamAsync(Windows::Storage::Streams::IRandomAccessStream stream)
     {
