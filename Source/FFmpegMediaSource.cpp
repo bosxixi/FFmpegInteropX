@@ -468,10 +468,10 @@ namespace winrt::FFmpegInteropX::implementation
             m_pReader = std::shared_ptr<FFmpegReader>(new FFmpegReader(avFormatCtx, &sampleProviders, config.as<FFmpegInteropX::MediaSourceConfig>()));
             m_pReader->eventCallback = [this](AvSubtitleEventArgs* s) {
                 this->RaiseSubtitleCueEntered(s);
-            };
+                };
             m_pReader->readCallback = [this](int r) {
                 this->BytesSnapshot(r);
-            };
+                };
             if (m_pReader == nullptr)
             {
                 hr = E_OUTOFMEMORY;
@@ -606,9 +606,9 @@ namespace winrt::FFmpegInteropX::implementation
                                     auto avsub = winrt::FFmpegInteropX::AvSubtitleTrack(codecName, lang, index, winrt::to_hstring(imageType));
                                     avsubtitlesvector.Append(avsub);
                                 }
-                         
+
                             }
-                           
+
                         }
                     }
                     //----------------------------------------------------------------------
@@ -1382,7 +1382,17 @@ namespace winrt::FFmpegInteropX::implementation
     {
         std::lock_guard lock(mutex);
         if (this->config->IsFrameGrabber) throw_hresult(E_UNEXPECTED);
-        return mssWeak.get();
+
+        auto source = mssWeak.get();
+
+        if (source == nullptr)
+        {
+            auto mss = CreateMediaStreamSource();
+
+            return mss;
+        }
+
+        return source;
     }
 
     MediaSource FFmpegMediaSource::CreateMediaSource()
@@ -2569,7 +2579,7 @@ namespace winrt::FFmpegInteropX::implementation
         {
             // Make sure we have at least 4 bytes for BOM check
             bool isEof = false;
-            while (bytesRead < min(bufSize,4) && !isEof)
+            while (bytesRead < min(bufSize, 4) && !isEof)
             {
                 ULONG read = 0;
                 hr = mss->fileStreamData->Read(buf + bytesRead, bufSize - bytesRead, &read);
