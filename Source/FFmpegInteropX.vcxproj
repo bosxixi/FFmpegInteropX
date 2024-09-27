@@ -203,7 +203,6 @@
     <ClInclude Include="AvCodecContextHelpers.h" />
     <ClInclude Include="AvSubtitleContextTrack.h" />
     <ClInclude Include="AvSubtitleTrack.h" />
-    <ClInclude Include="BasicVideoEffect.h" />
     <ClInclude Include="ChapterInfo.h" />
     <ClInclude Include="CharacterEncoding.h" />
     <ClInclude Include="CodecChecker.h" />
@@ -263,7 +262,6 @@
     <ClCompile Include="AudioStreamInfo.cpp" />
     <ClCompile Include="AvSubtitleContextTrack.cpp" />
     <ClCompile Include="AvSubtitleTrack.cpp" />
-    <ClCompile Include="BasicVideoEffect.cpp" />
     <ClCompile Include="ChapterInfo.cpp" />
     <ClCompile Include="CharacterEncoding.cpp" />
     <ClCompile Include="CodecChecker.cpp" />
