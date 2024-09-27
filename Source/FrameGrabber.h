@@ -5,9 +5,6 @@
 #include "NativeBuffer.h"
 
 using namespace NativeBuffer;
-// Note: Remove this static_assert after copying these generated source files to your project.
-// This assertion exists to avoid compiling these generated source files directly.
-//static_assert(false, "Do not compile generated C++/WinRT source files directly");
 
 namespace winrt::FFmpegInteropX::implementation
 {
@@ -25,6 +22,11 @@ namespace winrt::FFmpegInteropX::implementation
         static IAsyncOperation<FFmpegInteropX::FrameGrabber> CreateFromUriAsync(hstring uri);
 
         static IAsyncOperation<bool> CombineAsync(Windows::Storage::Streams::IRandomAccessStream outStream, Windows::Storage::Streams::IRandomAccessStream audioStream, Windows::Storage::Streams::IRandomAccessStream videoStream, winrt::hstring format);
+
+#ifndef UWP
+        /// <summary>Creates a new FrameGrabber from the specified file.</summary>
+        static IAsyncOperation<FFmpegInteropX::FrameGrabber> CreateFromFileAsync(hstring fileName) { return CreateFromUriAsync(fileName); }
+#endif
 
         /// <summary>The duration of the video stream.</summary>
         TimeSpan Duration();

@@ -2,10 +2,6 @@
 #include "FrameGrabber.h"
 #include "FrameGrabber.g.cpp"
 
-// Note: Remove this static_assert after copying these generated source files to your project.
-// This assertion exists to avoid compiling these generated source files directly.
-//static_assert(false, "Do not compile generated C++/WinRT source files directly");
-
 namespace winrt::FFmpegInteropX::implementation
 {
     static int FileStreamRead(void* ptr, uint8_t* buf, int bufSize);
@@ -18,9 +14,9 @@ namespace winrt::FFmpegInteropX::implementation
         co_await winrt::resume_background();
         auto config = winrt::make_self<MediaSourceConfig>();
         config->IsFrameGrabber = true;
-        config->VideoDecoderMode(VideoDecoderMode::ForceFFmpegSoftwareDecoder);
+        config->Video().VideoDecoderMode(VideoDecoderMode::ForceFFmpegSoftwareDecoder);
 
-        auto result = FFmpegMediaSource::CreateFromStream(stream, config, nullptr);
+        auto result = FFmpegMediaSource::CreateFromStream(stream, config, nullptr, 0, false);
         if (result == nullptr)
         {
             throw_hresult(E_FAIL);// ref new Exception(E_FAIL, "Could not create MediaStreamSource.");
@@ -234,9 +230,9 @@ namespace winrt::FFmpegInteropX::implementation
 
         auto config = winrt::make_self<MediaSourceConfig>();
         config->IsFrameGrabber = true;
-        config->VideoDecoderMode(VideoDecoderMode::ForceFFmpegSoftwareDecoder);
+        config->Video().VideoDecoderMode(VideoDecoderMode::ForceFFmpegSoftwareDecoder);
 
-        auto result = FFmpegMediaSource::CreateFromUri(uri, config, nullptr);
+        auto result = FFmpegMediaSource::CreateFromUri(uri, config, nullptr, 0, false);
         if (result == nullptr)
         {
             throw_hresult(E_FAIL);
