@@ -455,23 +455,19 @@ namespace winrt::FFmpegInteropX::implementation
         }
     }
 
-    static int FileStreamWrite(void* ptr, uint8_t* buf, int bufSize)
-    {
+    static int FileStreamWrite(void* ptr, const uint8_t* buf, int bufSize) {
         IStream* pStream = reinterpret_cast<IStream*>(ptr);
         ULONG bytesRead = 0;
-        HRESULT hr = pStream->Write(buf, bufSize, &bytesRead);
-
-        if (FAILED(hr))
-        {
+        // Cast away const-ness for writing  
+        HRESULT hr = pStream->Write(const_cast<uint8_t*>(buf), bufSize, &bytesRead);
+        if (FAILED(hr)) {
             return -1;
         }
-
-        // If we succeed but don't have any bytes, assume end of file
-        if (bytesRead == 0)
-        {
-            return AVERROR_EOF;  // Let FFmpeg know that we have reached eof
+        // If we succeed but don't have any bytes, assume end of file  
+        if (bytesRead == 0) {
+            return AVERROR_EOF;  // Let FFmpeg know that we have reached eof  
         }
-
         return bytesRead;
     }
+
 }
